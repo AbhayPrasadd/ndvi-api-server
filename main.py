@@ -4,10 +4,13 @@ import ee
 from datetime import date, timedelta
 import os
 
+# Initialize Earth Engine using Service Account
+service_account = 'ndvi-service@coherent-coder-454119-u9.iam.gserviceaccount.com'  
+credentials = ee.ServiceAccountCredentials(service_account, 'service-account.json')
+ee.Initialize(credentials)
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
-
-ee.Initialize(project='coherent-coder-454119-u9')
 
 @app.route('/ndvi', methods=['GET'])
 def get_ndvi():
